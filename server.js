@@ -15,7 +15,6 @@ app.use((req, res, next) => {  //register some middleware
     if (err) {
       console.log('Unable to append to server.log.');
     }
-
   });
   next();
 });
@@ -32,18 +31,6 @@ hbs.registerHelper('screamIt',(text) => {
 //set up http route handler
 //For http get Request handler.  When user request root of app
 app.get('/',(req,res) => {
-  //res.send('<h1>Hello Express!</h1>');
-  //send json object
-  // res.send({
-  //   name: 'CozmicFlo',
-  //   likes: [
-  //     'Biking',
-  //     'Animals',
-  //     'Felting',
-  //     'Traveling'
-  //   ],
-  //   welcomeMessage: 'Welcome to my Website!'
-  // });
   res.render('home.hbs',{
     siteName: 'CozmicFlo',
     likes: [
@@ -55,7 +42,6 @@ app.get('/',(req,res) => {
     pageTitle: 'CozmicFlo Page',
     welcomeMessage: 'Welcome to my Website!',
   });
-
 });
 
 app.get('/about',(req,res)=> {
@@ -63,14 +49,18 @@ app.get('/about',(req,res)=> {
   res.render('about.hbs', {
     pageTitle: 'About Page',
   });
-
 })
+app.get('/project',(req,res) => {
+  res.render('project.hbs', {
+    pageTitle:'Project Page'
+  })
+});
 //Route handler when a request fails
 app.get('/bad', (req,res) => {
   res.send({
     errorMessage:'Unable to handle Request!'
   })
-})
+});
 //Bind the application to a port
 app.listen(port,() => {
   console.log(`Server is up and running on port ${port}`);
